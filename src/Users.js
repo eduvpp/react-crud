@@ -56,9 +56,10 @@ export default function UserList() {
         window.location = '/update/' + id
     }
 
-    const UserDelete = _id => {
+    const UserDelete = id => {
         var data = {
-            'id': _id
+            'id': id
+
         }
         fetch('http://localhost:3000/users/delete/:id', {
             method: 'DELETE',
@@ -86,13 +87,13 @@ export default function UserList() {
                     <Box display="flex">
                         <Box flexGrow={1}>
                             <Typography component="h2" variant="h6" color="primary" gutterBottom>
-                                USERS
+                                Usuários
                             </Typography>
                         </Box>
                         <Box>
                             <Link to="/create">
                                 <Button variant="contained" color="primary">
-                                    CREATE
+                                    Criar
                                 </Button>
                             </Link>
                         </Box>
@@ -101,30 +102,23 @@ export default function UserList() {
                         <Table className={classes.table} aria-label="simple table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell align="right">ID</TableCell>
-                                    <TableCell align="center">Avatar</TableCell>
-                                    <TableCell align="left">First</TableCell>
-                                    <TableCell align="left">Last</TableCell>
-                                    <TableCell align="left">Username</TableCell>
-                                    <TableCell align="center">Action</TableCell>
+                                    <TableCell align="right">Nome</TableCell>
+                                    <TableCell align="center">Idade</TableCell>
+                                    <TableCell align="left">Usuário</TableCell>
+                                    <TableCell align="left">Contato</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {users.map((user) => (
                                     <TableRow key={user._id}>
                                         <TableCell align="right">{user._id}</TableCell>
-                                        <TableCell align="center">
-                                            <Box display="flex" justifyContent="center">
-                                                <Avatar src={user.avatar} />
-                                            </Box>
-                                        </TableCell>
-                                        <TableCell align="left">{user.fname}</TableCell>
-                                        <TableCell align="left">{user.lname}</TableCell>
-                                        <TableCell align="left">{user.name}</TableCell>
+                                        <TableCell align="center">{user.bdage}</TableCell>
+                                        <TableCell align="left">{user.user}</TableCell>
+                                        <TableCell align="left">{user.phone}</TableCell>
                                         <TableCell align="center">
                                             <ButtonGroup color="primary" aria-label="outlined primary button group">
-                                                <Button onClick={() => UpdateUser(user.id)}>Edit</Button>
-                                                <Button onClick={() => UserDelete(user.id)}>Del</Button>
+                                                <Button onClick={() => UpdateUser(user._id)}>Editar</Button>
+                                                <Button onClick={() => UserDelete(user.id)}>Deletar</Button>
                                             </ButtonGroup>
                                         </TableCell>
                                     </TableRow>
